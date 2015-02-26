@@ -1,4 +1,5 @@
 Mumbai, India
-San Francisco
-Nigeria
+San Francisco, CA
+Lagos, Nigeria
 Dallas,Texas
+Kansas City, KS
