@@ -1,4 +1,22 @@
 Rails.application.routes.draw do
+  root 'sites#index'
+
+  resources :plans do
+    post '/reviews', to: 'reviews#create'
+    delete '/reviews/:id', to: 'reviews#destroy'
+  end
+
+  resources :destinations do
+    post '/reviews', to: 'reviews#create'
+    delete '/reviews/:id', to: 'reviews#destroy'
+    resources :companions, shallow: true do
+      post '/reviews', to: 'reviews#create'
+      delete '/reviews/:id', to: 'reviews#destroy'
+    end
+  end
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
