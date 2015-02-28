@@ -1,53 +1,68 @@
 Rails.application.routes.draw do
   root 'sites#index'
 
+  # concern :reviewable do
+  #   resources :reviews, only: [:new, :show]
+  # end
+
   resources :plans do
     post '/reviews', to: 'reviews#create'
     delete '/reviews/:id', to: 'reviews#destroy'
-  end
-
-  resources :destinations do
+    resources :destinations, shallow: true do
     post '/reviews', to: 'reviews#create'
     delete '/reviews/:id', to: 'reviews#destroy'
-    resources :companions, shallow: true do
+  end
+  end
+
+  resources :companions do
       post '/reviews', to: 'reviews#create'
       delete '/reviews/:id', to: 'reviews#destroy'
     end
-  end
+
+  get '/companions/new', to: "companions#signup", as: :signup
+  get '/companions/login', to: "companions#login", as: :login
+  get '/companions/logout', to: "companions#logout", as: :logout
+  post '/companions/new', to: 'companions#create', as: :add_companion
+  post '/companions/login', to: 'companions#attempt_login', as: :signin
 
 =begin
-Prefix Verb   URI Pattern                                            Controller#Action
-                     root GET    /                                                      sites#index
-             plan_reviews POST   /plans/:plan_id/reviews(.:format)                      reviews#create
-                          DELETE /plans/:plan_id/reviews/:id(.:format)                  reviews#destroy
-                    plans GET    /plans(.:format)                                       plans#index
-                          POST   /plans(.:format)                                       plans#create
-                 new_plan GET    /plans/new(.:format)                                   plans#new
-                edit_plan GET    /plans/:id/edit(.:format)                              plans#edit
-                     plan GET    /plans/:id(.:format)                                   plans#show
-                          PATCH  /plans/:id(.:format)                                   plans#update
-                          PUT    /plans/:id(.:format)                                   plans#update
-                          DELETE /plans/:id(.:format)                                   plans#destroy
-      destination_reviews POST   /destinations/:destination_id/reviews(.:format)        reviews#create
-                          DELETE /destinations/:destination_id/reviews/:id(.:format)    reviews#destroy
-        companion_reviews POST   /companions/:companion_id/reviews(.:format)            reviews#create
-                          DELETE /companions/:companion_id/reviews/:id(.:format)        reviews#destroy
-   destination_companions GET    /destinations/:destination_id/companions(.:format)     companions#index
-                          POST   /destinations/:destination_id/companions(.:format)     companions#create
-new_destination_companion GET    /destinations/:destination_id/companions/new(.:format) companions#new
-           edit_companion GET    /companions/:id/edit(.:format)                         companions#edit
-                companion GET    /companions/:id(.:format)                              companions#show
-                          PATCH  /companions/:id(.:format)                              companions#update
-                          PUT    /companions/:id(.:format)                              companions#update
-                          DELETE /companions/:id(.:format)                              companions#destroy
-             destinations GET    /destinations(.:format)                                destinations#index
-                          POST   /destinations(.:format)                                destinations#create
-          new_destination GET    /destinations/new(.:format)                            destinations#new
-         edit_destination GET    /destinations/:id/edit(.:format)                       destinations#edit
-              destination GET    /destinations/:id(.:format)                            destinations#show
-                          PATCH  /destinations/:id(.:format)                            destinations#update
-                          PUT    /destinations/:id(.:format)                            destinations#update
-                          DELETE /destinations/:id(.:format)                            destinations#destroy
+Prefix Verb   URI Pattern                                         Controller#Action
+                root GET    /                                                   sites#index
+        plan_reviews POST   /plans/:plan_id/reviews(.:format)                   reviews#create
+                     DELETE /plans/:plan_id/reviews/:id(.:format)               reviews#destroy
+ destination_reviews POST   /destinations/:destination_id/reviews(.:format)     reviews#create
+                     DELETE /destinations/:destination_id/reviews/:id(.:format) reviews#destroy
+   plan_destinations GET    /plans/:plan_id/destinations(.:format)              destinations#index
+                     POST   /plans/:plan_id/destinations(.:format)              destinations#create
+new_plan_destination GET    /plans/:plan_id/destinations/new(.:format)          destinations#new
+    edit_destination GET    /destinations/:id/edit(.:format)                    destinations#edit
+         destination GET    /destinations/:id(.:format)                         destinations#show
+                     PATCH  /destinations/:id(.:format)                         destinations#update
+                     PUT    /destinations/:id(.:format)                         destinations#update
+                     DELETE /destinations/:id(.:format)                         destinations#destroy
+               plans GET    /plans(.:format)                                    plans#index
+                     POST   /plans(.:format)                                    plans#create
+            new_plan GET    /plans/new(.:format)                                plans#new
+           edit_plan GET    /plans/:id/edit(.:format)                           plans#edit
+                plan GET    /plans/:id(.:format)                                plans#show
+                     PATCH  /plans/:id(.:format)                                plans#update
+                     PUT    /plans/:id(.:format)                                plans#update
+                     DELETE /plans/:id(.:format)                                plans#destroy
+   companion_reviews POST   /companions/:companion_id/reviews(.:format)         reviews#create
+                     DELETE /companions/:companion_id/reviews/:id(.:format)     reviews#destroy
+          companions GET    /companions(.:format)                               companions#index
+                     POST   /companions(.:format)                               companions#create
+       new_companion GET    /companions/new(.:format)                           companions#new
+      edit_companion GET    /companions/:id/edit(.:format)                      companions#edit
+           companion GET    /companions/:id(.:format)                           companions#show
+                     PATCH  /companions/:id(.:format)                           companions#update
+                     PUT    /companions/:id(.:format)                           companions#update
+                     DELETE /companions/:id(.:format)                           companions#destroy
+              signup GET    /companions/new(.:format)                           companions#signup
+               login GET    /companions/login(.:format)                         companions#login
+              logout GET    /companions/logout(.:format)                        companions#logout
+       add_companion POST   /companions/new(.:format)                           companions#create
+              signin POST   /companions/login(.:format)                         companions#attempt_login
 =end
 
   # The priority is based upon order of creation: first created -> highest priority.
