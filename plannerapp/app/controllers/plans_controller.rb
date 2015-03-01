@@ -22,10 +22,12 @@ class PlansController < ApplicationController
 
   def create
     @plan = Plan.new plan_params
+    flash[:notice] = "Please make sure departure date is before return date"
+    render "plan/new" unless @plan.dates_ordered?
     @plan.creator_id = session[:companion_id]
     if @plan.save
       flash[:notice] = "New plan created, please add destinations"
-      redirect_to new_plan_destination_path
+      redirect_to new_plan_destination_path(@plan)
     else
       flash[:notice] = "Please fill out the form correctly"
       render "plans/new"
@@ -33,7 +35,8 @@ class PlansController < ApplicationController
   end
 
   def update
-    
+    flash[:notice] = "Please make sure departure date is before return date"
+    render "paln/new" unless @plan.dates_ordered? #need to check this too
   end
 
   def destroy
@@ -41,6 +44,7 @@ class PlansController < ApplicationController
   end
 
   private
+
   def plan_params
     params.require(:plan).permit(:name, :origin, :departure_date, :return_date)
   end

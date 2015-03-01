@@ -1,12 +1,15 @@
 <div class="container-fluid">
 <h2></h2>
-<h3>New Destination</h3>
-<p>Find me in app/views/destinations/new.html.erb</p>
+<h3 class="words">New Destination</h3>
+<% flash.each do |key, val| %>
+<p class="words">*<%= val %>*</p>
+<% end %>
+<p class="words">Please add your destination details below. <small>(please ensure your date is between the plan's departure and return dates - <%= "#{@plan.departure_date} to #{@plan.return_date})" %></small></p>
 <%= form_for [@plan, Destination.new] do |f| %>
-<p><%= f.label :name, "Name:" %> <%= f.text_field :name %></p>
-<p><%= f.label :location, "Location:" %> <%= f.text_field :location %></p>
-<p><%= f.label :destination_date, "Date:" %> <br><%= f.date_select :destination_date %></p>
-<p><%= f.submit, "Add Destination" %></p>
+<p><span class="words"><%= f.label :name, "Name:" %></span> <%= f.text_field :name %></p>
+<p><span class="words"><%= f.label :location, "Location:" %></span> <%= f.text_field :location %></p>
+<p><span class="words"><%= f.label :destination_date, "Date:" %></span> <br><%= f.date_select :destination_date %></p>
+<p><%= f.submit("Add Destination", class: "btn btn-success btn-sm") %></p>
 <% end %>
 
 </div>
