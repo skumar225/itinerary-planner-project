@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   #   resources :reviews, only: [:new, :show]
   # end
 
+  get '/companions/signup', to: "companions#signup", as: :signup
+  get '/companions/login', to: "companions#login", as: :login
+  get '/companions/logout', to: "companions#logout", as: :logout
+  post '/companions/signup', to: 'companions#create', as: :add_companion
+  post '/companions/login', to: 'companions#attempt_login', as: :signin
+
   resources :plans do
     post '/reviews', to: 'reviews#create'
     delete '/reviews/:id', to: 'reviews#destroy'
@@ -19,11 +25,7 @@ Rails.application.routes.draw do
       delete '/reviews/:id', to: 'reviews#destroy'
     end
 
-  get '/companions/new', to: "companions#signup", as: :signup
-  get '/companions/login', to: "companions#login", as: :login
-  get '/companions/logout', to: "companions#logout", as: :logout
-  post '/companions/new', to: 'companions#create', as: :add_companion
-  post '/companions/login', to: 'companions#attempt_login', as: :signin
+  
 
 =begin
 Prefix Verb   URI Pattern                                         Controller#Action
