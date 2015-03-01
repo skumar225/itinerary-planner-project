@@ -1,24 +1,24 @@
+<%= link_to "<h1 class='text-center col-sm-12' id = 'logo'>Plannit</h1>".html_safe, root_path%>
 
-
-<h1 class = "heading">Signup</h1>
+<h1 class = "heading text-center col-sm-12">Signup</h1>
 
 <%= form_for(@companion, url: signup_path) do |f|%>
 
 
 <p>
-  <%= f.text_field(:first_name, autofocus: true, placeholder: "firstname") %>
+  <%= f.text_field(:first_name, autofocus: true, placeholder: "firstname",class: "col-md-12 text-center") %>
 </p>
 <p>
-  <%= f.text_field(:last_name, autofocus: true, placeholder: "lastname") %>
+  <%= f.text_field(:last_name, autofocus: true, placeholder: "lastname",class: "col-md-12 text-center") %>
 </p>
 <p>
-  <%= f.text_field(:email, autofocus: true, placeholder: "email") %>
+  <%= f.text_field(:email, autofocus: true, placeholder: "email",class: "col-md-12 text-center") %>
 </p>
 <p>
-  <%= f.password_field(:password, required: true,placeholder: "password") %>
+  <%= f.password_field(:password, required: true,placeholder: "password",class: "col-md-12 text-center") %>
 </p>
-<p>
-  <%= f.submit("Signup", class: "btn btn-primary") %>
+<p class = "col-md-12 text-center">
+  <%= f.submit("Signup", class: "btn btn-success btn-sm") %>
 </p>
   <%= link_to "Have an account already? Log in here", login_path %>
 <% end %>

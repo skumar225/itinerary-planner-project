@@ -1,14 +1,17 @@
 <div class="container-fluid">
-<h2>New Travel Plans</h2>
+<%= link_to "<h1 class='text-center col-sm-12' id = 'logo'>Plannit</h1>".html_safe, root_path%>
+<div class = "text-center col-sm-12 words box">
+  <h2 class='text-center col-sm-12'>New Travel Plans</h2>
 
-<p>Please add details of your travel plans below:</p>
+  <p>Please add details of your travel plans below:</p>
 
-<%= form_for Plan.new do |f| %>
-<p><%= f.label :name, "Name:" %> <%= f.text_field :name %></p>
-<p><%= f.label :origin, "Origin:" %> <%= f.text_field :origin %></p>
-<p><%= f.label :departure_date, "Departure Date:" %> <br><%= f.text_field :departure_date %></p>
-<p><%= f.label :return_date, "Return Date:" %> <br><%= f.text_field :return_date %></p>
-<p><small>After submitting you may add destinations and companions.</small></p>
-<p><%= f.submit "Make plan" %></p>
-<% end %>
+  <%= form_for Plan.new do |f| %>
+    <p><%= f.label :name, "Name:" %> <%= f.text_field :name %></p>
+    <p><%= f.label :origin, "Origin:" %> <%= f.text_field :origin %></p>
+    <p><%= f.label :departure_date, "Departure Date:" %> <br><%= f.text_field :departure_date %></p>
+    <p><%= f.label :return_date, "Return Date:" %> <br><%= f.text_field :return_date %></p>
+    <p><small>After submitting you may add destinations and companions.</small></p>
+  <p><%= submit_tag("Make Plan", class: "btn btn-success btn-sm") %></p>
+  <% end %>
+</div>
 </div>
