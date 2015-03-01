@@ -17,7 +17,7 @@ before_action :find_reviewable
 #only the companion that created the review can delete it
   def destroy
     review = Review.find(params[:id])
-    if session[:user_id] == review.companion_id 
+    if session[:companion_id] == review.companion_id 
     review.destroy
     flash[:notice] = "Review deleted"
     redirect_to :back
@@ -33,7 +33,7 @@ before_action :find_reviewable
 private
 # checking if user signed in before allowing them to add a review
   def signed_in
-    unless session[user_id]
+    unless session[:companion_id]
       flash[:notice] = "You must be logged in to add a comment"
       redirect_to :back
     end

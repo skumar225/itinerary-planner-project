@@ -21,9 +21,9 @@ Rails.application.routes.draw do
   end
 
   resources :companions do
-      post '/reviews', to: 'reviews#create'
-      delete '/reviews/:id', to: 'reviews#destroy'
-    end
+    post '/reviews', to: 'reviews#create'
+    delete '/reviews/:id', to: 'reviews#destroy'
+  end
 
   
 

@@ -1,7 +1,13 @@
 class PlansController < ApplicationController
   def index
-    @companion = Companion.find session[:user_id]
+    @companion = Companion.find session[:companion_id]
     @plans = Plan.find_by(creator_id: @companion.id)
+    @message = ""
+    if @plans
+      @message = "Your plan(s) are listed below:"
+    else
+      @message ="You have not created any plans."
+    end
   end
 
   def show

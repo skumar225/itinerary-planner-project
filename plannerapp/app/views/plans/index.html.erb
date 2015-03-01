@@ -1,13 +1,12 @@
-<h2><%= @companion.fullname %>'s' Plans</h2>
 
-<% if @plans %>
-<p>You have not created any plans. Add a plan <%= link_to "here", new_plan_path %> </p>
-<% else %>
-<p>Your plan(s) are listed below:</p>
-<% end %>
+<div class="container-fluid">
+<h2><%= @companion.fullname %>'s Plans</h2>
+
+<p> Add a plan <%= link_to "here.", new_plan_path %> <%= @message %></p>
+
 <ul>
 <% @plans.each do |plan| %>
 <%= link_to plan.name, plan %>
 <% end %>
 </ul>
-
+</div>
