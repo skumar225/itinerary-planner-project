@@ -6,7 +6,7 @@ class PlansController < ApplicationController
     if @plans
       @message = "Your plan(s) are listed below:"
     else
-      @message ="You have not created any plans."
+      @message = "You have not created any plans."
     end
   end
 
