@@ -26,7 +26,7 @@ class CompanionsController < ApplicationController
     if params[:email].present? && params[:password].present?
       found_user = Companion.find_by_email params[:email]
       if found_user
-        authorized_user = found_user.confirm params[:password]
+        authorized_user = found_user.authenticate(params[:password])
       end
     end
 
