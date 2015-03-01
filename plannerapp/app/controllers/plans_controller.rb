@@ -21,7 +21,15 @@ class PlansController < ApplicationController
   end
 
   def create
-    
+    @plan = Plan.new plan_params
+    @plan.creator_id = session[:companion_id]
+    if @plan.save
+      flash[:notice] = "New plan created, please add destinations"
+      redirect_to new_plan_destination_path
+    else
+      flash[:notice] = "Please fill out the form correctly"
+      render "plans/new"
+    end
   end
 
   def update
