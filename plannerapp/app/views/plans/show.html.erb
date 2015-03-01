@@ -1,2 +1,28 @@
-<h1>Plans#show</h1>
-<p>Find me in app/views/plans/show.html.erb</p>
+<h1>Here's Your Plan</h1>
+
+
+<%= @plan.name %>
+<%= @plan.origin %>
+
+
+<% @destination.each do |destination| %>
+  <li>
+    <%= link_to "#{destination.name}", destination %>
+  <% destination.companions.each do |comp| %>
+  <li><%= comp.fullname %></li>
+  <% end %>
+  </li>
+<% end %>
+
+
+
+<% @companions.each do |companion| %>
+  <li>
+    <%= link_to "#{companion.fullname}", companion %>
+
+  </li>
+<% end %>
+
+<%= link_to "Edit Your Plan", edit_plan_path %>
+<%= link_to "Add a destination", new_plan_destination_path%>
+<%= link_to "Add a new companion", new_companion_path %>

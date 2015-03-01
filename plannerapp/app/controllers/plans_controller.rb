@@ -3,6 +3,9 @@ class PlansController < ApplicationController
   end
 
   def show
+    @plan = Plan.find(param[:id])  #Find a single plan
+    @destination = @plan.destinations
+
   end
 
   def new
@@ -20,6 +23,10 @@ class PlansController < ApplicationController
   end
 
   def destroy
+    @destination.destroy
+    @companion.destroy
+
+    redirect_to plan_path
     
   end
 
