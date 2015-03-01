@@ -1,7 +1,7 @@
 <br>
 <br>
 <h1 class="text-center" id= "logo">Plannit</h1>
-<h4 class="text-center" id = "heading">Discover your dreams and plan your next trip ..</h4>
+<h4 class="text-center heading">Discover your dreams and plan your next trip ..</h4>
 
 <br>
 <br>
@@ -18,14 +18,15 @@
             <div class="wrap">
                 <p class="form-title">
                     Sign In</p>
-                <form class="login">
+                <form class="login" action = '/companions/login' method ="POST">
                   <input type="text" placeholder="email" />
                   <input type="password" placeholder="password" />
                   <input type="submit" value="Sign In" class="btn btn-success btn-sm" />
                 </form>
                 <p>
                 <div class="text-center">
-                  <%= link_to "Not a member yet, Sign-up! to see what Plannit can do for you!", root_path %>
+                  <%= link_to "Not a member yet, Sign-up! to see what Plannit can do for you!", '/companions/signup' %>
+                  
                 </div>
                 </p>
             </div>
