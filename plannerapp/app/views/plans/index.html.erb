@@ -5,8 +5,10 @@
 <p> Add a plan <%= link_to "here.", new_plan_path %> <%= @message %></p>
 
 <ul>
+<% if @plans %>
 <% @plans.each do |plan| %>
 <%= link_to plan.name, plan %>
+<% end %>
 <% end %>
 </ul>
 </div>
