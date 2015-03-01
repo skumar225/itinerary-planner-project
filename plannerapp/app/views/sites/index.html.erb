@@ -18,11 +18,15 @@
             <div class="wrap">
                 <p class="form-title">
                     Sign In</p>
-                <form class="login" action = '/companions/login' method ="POST">
-                  <input type="text" placeholder="email" />
-                  <input type="password" placeholder="password" />
-                  <input type="submit" value="Sign In" class="btn btn-success btn-sm" />
-                </form>
+                    <%= form_tag(login_path, class: "login") do %>
+
+                     <%= text_field_tag(:email, params[:email], autofocus: true, placeholder: "email")%>
+
+
+                    <%= password_field_tag(:password,placeholder: "")%>
+
+                    <%= submit_tag("Log in", class: "btn btn-success btn-sm") %>
+               
                 <p>
                 <div class="text-center">
                   <%= link_to "Not a member yet, Sign-up! to see what Plannit can do for you!", '/companions/signup' %>
@@ -32,6 +36,8 @@
         </div>
     </div>
 
+
+<% end %>
 
 </div>
 

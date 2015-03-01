@@ -1,5 +1,5 @@
 class CompanionsController < ApplicationController
-  before_action :confirm_logged_in, only: [:index]
+  # before_action :confirm_logged_in, only: [:index]
   # before_action :prevent_login_signup, only: [:signup, :login]
 
 
