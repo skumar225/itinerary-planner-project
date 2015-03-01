@@ -14,9 +14,10 @@ before_action :find_reviewable
     end
   end
 
+#only the companion that created the review can delete it
   def destroy
     review = Review.find(params[:id])
-    if session[:user_id] == review.reviewable_id #do we want the creator to be able to delete other people's reviews?
+    if session[:user_id] == review.companion_id 
     review.destroy
     flash[:notice] = "Review deleted"
     redirect_to :back
@@ -34,6 +35,7 @@ private
   def signed_in
     unless session[user_id]
       flash[:notice] = "You must be logged in to add a comment"
+      redirect_to :back
     end
   end
 
