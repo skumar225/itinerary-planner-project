@@ -1,11 +1,10 @@
 class CompanionsController < ApplicationController
   before_action :confirm_logged_in, only: [:index]
-  before_action :prevent_login_signup, only: [:signup, :login]
+  # before_action :prevent_login_signup, only: [:signup, :login]
 
 
   def signup
     @companion = Companion.new
-    render :signup
   end
 
   def create
@@ -20,7 +19,6 @@ class CompanionsController < ApplicationController
   end
 
   def login
-    redirect_to root_path
   end
 
   def attempt_login
@@ -47,17 +45,6 @@ class CompanionsController < ApplicationController
 
   end
 
-  def confirm_logged_in
-    unless session[:companion_id]
-      redirect_to root_path, alert: "Please log in"
-    end
-  end
-
-  def prevent_login_signup
-    if session[:companion_id]
-      redirect_to root_path
-    end
-  end
 
   def logout
     session[:companion_id] = nil
@@ -69,6 +56,18 @@ class CompanionsController < ApplicationController
   private
   def companion_params
     params.require(:companion).permit(:first_name, :last_name,:email, :password, :password_digest)
+  end
+
+  def confirm_logged_in
+    unless session[:companion_id]
+      redirect_to root_path, alert: "Please log in"
+    end
+  end
+
+  def prevent_login_signup
+    if session[:companion_id]
+      redirect_to root_path
+    end
   end
 
 end
