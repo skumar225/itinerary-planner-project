@@ -8,6 +8,7 @@ class DestinationsController < ApplicationController
   end
 
   def new
+    @plan = Plan.find params[:plan_id]
   end
 
   def edit

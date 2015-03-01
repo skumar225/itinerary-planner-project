@@ -21,6 +21,14 @@ body
     margin: 0;
 }
 
+.words{
+    color: white;
+}
+
+.box{
+    background-color: rgba(245, 245, 245, 0.4);
+}
+
 .wrap
 {
     width: 100%;

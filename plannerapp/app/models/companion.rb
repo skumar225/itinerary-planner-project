@@ -10,6 +10,6 @@ class Companion < ActiveRecord::Base
   has_many :destinations, through: :trips
 
   def fullname
-    return :first_name + ' ' + :last_name
+    return "#{first_name} #{last_name}"
   end
 end

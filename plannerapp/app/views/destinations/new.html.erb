@@ -1,2 +1,12 @@
-<h1>Destinations#new</h1>
+<div class="container-fluid">
+<h2></h2>
+<h3>New Destination</h3>
 <p>Find me in app/views/destinations/new.html.erb</p>
+<%= form_for [@plan, Destination.new] do |f| %>
+<p><%= f.label :name, "Name:" %> <%= f.text_field :name %></p>
+<p><%= f.label :location, "Location:" %> <%= f.text_field :location %></p>
+<p><%= f.label :destination_date, "Date:" %> <br><%= f.date_select :destination_date %></p>
+<p><%= f.submit, "Add Destination" %></p>
+<% end %>
+
+</div>

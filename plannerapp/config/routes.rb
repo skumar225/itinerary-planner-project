@@ -17,13 +17,14 @@ Rails.application.routes.draw do
     resources :destinations, shallow: true do
     post '/reviews', to: 'reviews#create'
     delete '/reviews/:id', to: 'reviews#destroy'
+    
   end
   end
 
   resources :companions do
-      post '/reviews', to: 'reviews#create'
-      delete '/reviews/:id', to: 'reviews#destroy'
-    end
+    post '/reviews', to: 'reviews#create'
+    delete '/reviews/:id', to: 'reviews#destroy'
+  end
 
   
 

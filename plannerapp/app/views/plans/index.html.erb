@@ -1,13 +1,22 @@
-<h2><%= @companion.fullname %>'s' Plans</h2>
 
-<% if @plans %>
-<p>You have not created any plans. Add a plan <%= link_to "here", new_plan_path %> </p>
-<% else %>
-<p>Your plan(s) are listed below:</p>
-<% end %>
-<ul>
-<% @plans.each do |plan| %>
-<%= link_to plan.name, plan %>
-<% end %>
-</ul>
+<div class="container-fluid">
 
+<%= link_to "<h1 class='text-center col-sm-12' id = 'logo'>Plannit</h1>".html_safe, root_path%>
+<p class="navbar-text text-center words col-sm-12">Welcome <%= @companion.fullname %> | <%= link_to "log out!", '/companions/logout' %> </p>
+
+<h2 class="text-center heading col-sm-12"><%= @companion.fullname %>'s Plans</h2>
+
+<div class = "text-center col-sm-12 words box">
+  <p> Add a plan <%= link_to "here.", new_plan_path %> <%= @message %></p>
+
+    <ul>
+      <% if @plans %>
+      <% @plans.each do |plan| %>
+      <%= link_to plan.name, plan %>
+      <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!--  -->

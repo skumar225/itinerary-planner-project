@@ -1,7 +1,13 @@
 class PlansController < ApplicationController
   def index
-    @companion = Companion.find session[:user_id]
+    @companion = Companion.find session[:companion_id]
     @plans = Plan.find_by(creator_id: @companion.id)
+    @message = ""
+    if @plans
+      @message = "Your plan(s) are listed below:"
+    else
+      @message = "You have not created any plans."
+    end
   end
 
   def show
@@ -16,7 +22,15 @@ class PlansController < ApplicationController
   end
 
   def create
-    
+    @plan = Plan.new plan_params
+    @plan.creator_id = session[:companion_id]
+    if @plan.save
+      flash[:notice] = "New plan created, please add destinations"
+      redirect_to new_plan_destination_path
+    else
+      flash[:notice] = "Please fill out the form correctly"
+      render "plans/new"
+    end
   end
 
   def update
