@@ -8,4 +8,8 @@ class Companion < ActiveRecord::Base
   has_many :reviews, as: :reviewable
   has_many :trips
   has_many :destinations, through: :trips
+
+  def fullname
+    return :first_name + ' ' + :last_name
+  end
 end
