@@ -11,7 +11,7 @@ class PlansController < ApplicationController
   end
 
   def show
-    @plan = Plan.find(param[:id])  #Find a single plan
+    @plan = Plan.find_by_id(:id) 
     @destination = @plan.destinations
   end
 

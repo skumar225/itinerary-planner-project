@@ -16,13 +16,8 @@
 
 
 
-<% @companions.each do |companion| %>
-  <li>
-    <%= link_to "#{companion.fullname}", companion %>
 
-  </li>
-<% end %>
-
-<%= link_to "Edit Your Plan", edit_plan_path %>
 <%= link_to "Add a destination", new_plan_destination_path%>
 <%= link_to "Add a new companion", new_companion_path %>
+<br>
+<%= link_to "Edit Your Plan", edit_plan_path %>

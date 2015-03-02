@@ -1,2 +1,17 @@
-<h1>Plans#edit</h1>
-<p>Find me in app/views/plans/edit.html.erb</p>
+<div class="container-fluid">
+<%= link_to "<h1 class='text-center col-sm-12' id = 'logo'>Plannit</h1>".html_safe, root_path%>
+<div class = "text-center col-sm-12 box">
+  <h2 class='text-center col-sm-12'>Edit Travel Plans</h2>
+
+  <p>Edit your plan details below:</p>
+
+<%= form_for Plan.new do |f| %>
+<p><%= f.label :name, "Name:" %> <%= f.text_field :name %></p>
+<p><%= f.label :origin, "Origin:" %> <%= f.text_field :origin %></p>
+<p><%= f.label :departure_date, "Departure Date:" %> <br><%= f.date_select :departure_date %></p>
+<p><%= f.label :return_date, "Return Date:" %> <br><%= f.date_select :return_date %></p>
+<p><small>After submitting you may add destinations and companions.</small></p>
+<p><%= submit_tag("Make Plan", class: "btn btn-success btn-sm") %></p>
+<% end %>
+
+</div>
