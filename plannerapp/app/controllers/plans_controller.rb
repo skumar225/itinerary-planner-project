@@ -12,13 +12,15 @@ class PlansController < ApplicationController
 
   def show
     @plan = Plan.find(params[:id]) 
-    @destination = @plan.destinations
+    @destinations = @plan.destinations.order(:destination_date)
+    @plan.destination_id = @destinations.last
   end
 
   def new
   end
 
   def edit
+    @plan = Plan.find(params[:id]) 
   end
 
   def create

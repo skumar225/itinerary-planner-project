@@ -2,28 +2,33 @@
 <h1>Here's Your Plan</h1>
 
 
-<%= @plan.name %>
-<%= @plan.origin %>
+<h3><%= @plan.name %></h3>
+
+<p>Origin: <%= @plan.origin %></p>
+<p>Departure Date: <%= @plan.departure_date %></p>
+<p>Final Destination: <%= @destinations.last.name %></p>
+<p>Return Date: <%= @plan.return_date %></p>
 
 
-<% @destination.each do |destination| %>
+<br><br><br><br>
+<h4>All Destinations</h4>
+<ul>
+<% @destinations.each do |dest| %>
   <li>
-    <%= link_to "#{destination.name}", destination %>
-  <% destination.companions.each do |comp| %>
+    <%= link_to "#{dest.name}", dest %>
+    <ul>
+  <% dest.companions.each do |comp| %>
   <li><%= comp.fullname %></li>
   <% end %>
+  </ul>
   </li>
 <% end %>
-
-
-<br>
-
-<%= link_to "Add a destination", new_plan_destination_path(@plan) %>
+</ul>
 
 <br>
 
-<%= link_to "Add a new companion", new_companion_path %>
-<br>
-<%= link_to "Edit Your Plan", edit_plan_path(@plan) %>
+<p><%= link_to "Edit Your Plan", edit_plan_path(@plan) %> |
+ <%= link_to "Add a destination", new_plan_destination_path(@plan) %> |
+ <%= link_to "Add a new companion", new_companion_path %></p>
 
 </div>

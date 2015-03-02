@@ -1,11 +1,13 @@
 class DestinationsController < ApplicationController
   before_action :date_check, only: [:update, :create]
-  before_action :find_plan
+  skip_before_action :find_plan, only: [:show]
 
   def index
   end
 
   def show
+    @destination = Destination.find params[:id]
+    @plan = @destination.plan
   end
 
   def new
