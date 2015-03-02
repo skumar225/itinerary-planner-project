@@ -1,7 +1,7 @@
 class PlansController < ApplicationController
   def index
     @companion = Companion.find session[:companion_id]
-    @plans = Plan.find_by(creator_id: @companion.id)
+    @plans = Plan.where(creator_id: @companion.id)
     @message = ""
     if @plans
       @message = "Your plan(s) are listed below:"
