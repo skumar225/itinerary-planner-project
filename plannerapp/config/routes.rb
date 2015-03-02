@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/companions/logout', to: "companions#logout", as: :logout
   post '/companions/signup', to: 'companions#create', as: :add_companion
   post '/companions/login', to: 'companions#attempt_login', as: :signin
+  post '/destinations/:destination_id/companions/new' => 'companions#add_companion', as: :add_dest_companion
 
   resources :plans do
     post '/reviews', to: 'reviews#create'

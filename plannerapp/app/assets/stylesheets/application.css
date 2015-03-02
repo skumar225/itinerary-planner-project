@@ -215,3 +215,13 @@ form.login a:hover
     padding: 10px;
     left: 45%;
 }
+
+textarea {
+    width: 550px;
+    height: 100px;
+    color: black;
+}
+
+
+
+

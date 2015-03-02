@@ -1,2 +1,42 @@
-<h1>Destinations#show</h1>
-<p>Find me in app/views/destinations/show.html.erb</p>
+<div class="container-fluid words">
+<h2>Destination: <%= @destination.name %></h2>
+
+<p>Name: <%= @destination.name %></p>
+<p>Travel Plan: <%= @plan.name %></p>
+<p>Location: <%= @destination.location %></p>
+<p>Date: <%= @destination.destination_date %></p>
+
+<h4>List of companions:</h4>
+
+<% @companions.each do |comp| %>
+<p><%= link_to comp.fullname, comp %></p>
+<% end %>
+
+<p>Add more companions: </p>
+<div class="col-md-2">
+<%= form_tag do |f| %>
+<%= collection_select(@destination, :companions, @p_comps, :id, :fullname, prompt: "Select Companion") %>
+<%= submit_tag("Add", class: "btn btn-success btn-sm") %>
+<% end %>
+</div><br><br>
+<div class="col-md-3">
+  <h3>Destination Reviews</h3>
+<% flash.each do |key, notice|  %>
+<p><%= notice %></p>
+<% end %>
+  <% @reviews.reverse.each do |review| %>
+  <li><%= review.review_text %> <p><%="By" + Companion.find(session[:companion_id])[0].fullname if session[:companion_id] %> written <%= time_ago_in_words review.created_at %> ago</li>
+  <% end %>
+
+  <% if session[:companion_id] %>
+  <%= form_for [@destination, Review.new] do |f| %>
+    <div class="form-group">
+    <%= f.text_area :review_text %>
+    <%= f.submit "Add Review", class: "btn btn-success btn-sm" %></div>
+    <% end %>
+    <% else %>
+    <p><%= link_to "Log in", login_path %> to add comment.</p>
+    <% end %>
+</div>
+</div>
+

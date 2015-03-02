@@ -4,4 +4,5 @@ class Destination < ActiveRecord::Base
   belongs_to :plan
   has_many :trips, dependent: :destroy
   has_many :companions, through: :trips
+  has_many :reviews, as: :reviewable
 end

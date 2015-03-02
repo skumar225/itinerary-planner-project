@@ -6,8 +6,12 @@ class DestinationsController < ApplicationController
   end
 
   def show
+    flash[:notice] = nil
     @destination = Destination.find params[:id]
     @plan = @destination.plan
+    @companions = @destination.companions
+    @p_comps = Companion.all - @companions
+    @reviews = @destination.reviews
   end
 
   def new
