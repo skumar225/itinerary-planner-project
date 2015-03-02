@@ -1,3 +1,4 @@
+<div class="container-fluid words">
 <h1>Here's Your Plan</h1>
 
 
@@ -15,9 +16,14 @@
 <% end %>
 
 
+<br>
 
+<%= link_to "Add a destination", new_plan_destination_path(@plan) %>
 
-<%= link_to "Add a destination", new_plan_destination_path%>
+<br>
+
 <%= link_to "Add a new companion", new_companion_path %>
 <br>
-<%= link_to "Edit Your Plan", edit_plan_path %>
+<%= link_to "Edit Your Plan", edit_plan_path(@plan) %>
+
+</div>

@@ -11,7 +11,7 @@ class PlansController < ApplicationController
   end
 
   def show
-    @plan = Plan.find_by_id(:id) 
+    @plan = Plan.find(params[:id]) 
     @destination = @plan.destinations
   end
 
