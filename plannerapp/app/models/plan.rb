@@ -7,4 +7,15 @@ class Plan < ActiveRecord::Base
   belongs_to :companion, foreign_key: :creator_id
   has_many :destinations, dependent: :destroy
   has_many :reviews, as: :reviewable
+
+#makes an inclusive date range from departure date to return date
+  def date_range
+    Range.new(departure_date, return_date)
+  end
+#checks that the return date is on-or-after the departure date
+  def dates_ordered?
+    v = departure_date <=> return_date
+    v == -1 || v == 0
+  end
+
 end
