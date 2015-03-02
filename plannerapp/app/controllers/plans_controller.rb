@@ -13,7 +13,12 @@ class PlansController < ApplicationController
   def show
     @plan = Plan.find(params[:id]) 
     @destinations = @plan.destinations.order(:destination_date)
-    @plan.destination_id = @destinations.last
+    final_dest = @destinations.last || nil
+    @plan.destination_id = final_dest
+    @final_dest = final_dest.name || nil #if there is an error we can try the next two lines
+    # @final_dest = ""
+    # @final_dest = final_dest.name if final_dest
+
   end
 
   def new

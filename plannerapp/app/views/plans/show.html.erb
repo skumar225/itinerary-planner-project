@@ -1,16 +1,16 @@
 <div class="container-fluid words">
+<p><%= link_to "Home", '/plans' %> | <%= link_to "log out!", '/companions/logout' %></p>
 <h1>Here's Your Plan</h1>
-
 
 <h3><%= @plan.name %></h3>
 
 <p>Origin: <%= @plan.origin %></p>
 <p>Departure Date: <%= @plan.departure_date %></p>
-<p>Final Destination: <%= @destinations.last.name %></p>
+<p>Final Destination: <%= @final_dest %></p>
 <p>Return Date: <%= @plan.return_date %></p>
 
 
-<br><br><br><br>
+<br><br><br>
 <h4>All Destinations</h4>
 <ul>
 <% @destinations.each do |dest| %>

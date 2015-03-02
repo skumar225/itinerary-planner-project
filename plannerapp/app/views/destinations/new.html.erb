@@ -1,10 +1,11 @@
 <div class="container-fluid">
+<p><%= link_to "Home", '/plans' %> | <%= link_to "log out!", '/companions/logout' %></p>
 <h2></h2>
 <h3 class="words">New Destination</h3>
 <% flash.each do |key, val| %>
-<p class="words">*<%= val %>*</p>
+<p class="words"><%= val %></p>
 <% end %>
-<p class="words">Please add your destination details below. <small>(please ensure your date is between the plan's departure and return dates - <%= "#{@plan.departure_date} to #{@plan.return_date})" %></small></p>
+<p class="words">Please add your destination details below. <small>(please ensure your date is between <%= @plan.name %>'s departure and return dates - <%= "#{@plan.departure_date} to #{@plan.return_date})" %></small></p>
 <%= form_for [@plan, Destination.new] do |f| %>
 <p><span class="words"><%= f.label :name, "Name:" %></span> <%= f.text_field :name %></p>
 <p><span class="words"><%= f.label :location, "Location:" %></span> <%= f.text_field :location %></p>

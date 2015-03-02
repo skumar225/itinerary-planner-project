@@ -1,6 +1,6 @@
 class DestinationsController < ApplicationController
   before_action :date_check, only: [:update, :create]
-  skip_before_action :find_plan, only: [:show]
+  skip_before_action :find_plan, only: [:show, :new]
 
   def index
   end
@@ -11,6 +11,8 @@ class DestinationsController < ApplicationController
   end
 
   def new
+    flash[:notice] = nil
+    @plan = Plan.find params[:plan_id]
   end
 
   def edit
@@ -19,6 +21,7 @@ class DestinationsController < ApplicationController
   def create
     @destination = Destination.new destination_params
     if @destination.save
+      @plan.destinations << @destination
       @destination.companions << @plan.companion #auto-adding creator to destination
       redirect_to plan_destinations_path(@plan)
     else
