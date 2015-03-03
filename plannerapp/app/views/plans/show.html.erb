@@ -15,7 +15,7 @@
 <ul>
 <% @destinations.each do |dest| %>
   <li>
-    <%= link_to "#{dest.name}", dest %>
+    <%= link_to "#{dest.name}", dest %> 
     <ul>
   <% dest.companions.each do |comp| %>
   <li><%= comp.fullname %></li>
@@ -26,7 +26,14 @@
 </ul>
  <br>
 <p><%= link_to "Edit Your Plan", edit_plan_path(@plan) %> |
- <%= link_to "Add a destination", new_plan_destination_path(@plan) %> |
- <%= link_to "Add a new companion", new_companion_path %></p>
+ <%= link_to "Add a destination", new_plan_destination_path(@plan) %></p>
+
+ <h3>Reviews Section</h3>
+
+ <% if @reviews %>
+ <% @reviews.each do |review| %>
+ <p><%= review.review_text %></p>
+ <% end %>
+ <% end %>
 
 </div>

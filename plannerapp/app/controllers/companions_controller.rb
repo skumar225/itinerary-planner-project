@@ -1,5 +1,5 @@
 class CompanionsController < ApplicationController
-  # before_action :confirm_logged_in, only: [:index]
+  before_action :logged_in, only: [:index, :show, :add_comp]
   # before_action :prevent_login_signup, only: [:signup, :login]
 
 
@@ -11,7 +11,7 @@ class CompanionsController < ApplicationController
     @companion = Companion.create(companion_params)
     if @companion.save
       session[:companion_id] = @companion.id
-      flash[:success] = "You are now logged in!"
+      flash[:success] = "Welcome to Plannit. You are now logged in."
       redirect_to plans_path
     else
       render :signup
@@ -19,6 +19,27 @@ class CompanionsController < ApplicationController
   end
 
   def login
+  end
+
+  def add_comp
+    @companion = Companion.new companion_params
+    @destination = Destination.find params[:destination_id]
+    if @companion.save
+      @companion.destinations << @destination
+      flash[:notice] = "Companion added: #{@companion.fullname}"
+      redirect_to :back
+    else
+      flash[:notice] = "failed to add companion, please correct your form"
+      redirect_to :back
+    end
+  end
+
+  def add_dest_comp
+    @companion = Companion.find companion_params[:comp].to_i
+    @destination = Destination.find params[:destination_id]
+    @destination.companions << @companion
+    flash[:notice] = "Companion added: #{@companion.fullname}"
+    redirect_to :back
   end
 
   def attempt_login
@@ -55,10 +76,10 @@ class CompanionsController < ApplicationController
 
   private
   def companion_params
-    params.require(:companion).permit(:first_name, :last_name,:email, :password, :password_digest)
+    params.require(:companion).permit(:first_name, :last_name, :email, :password, :password_digest, :comp)
   end
 
-  def confirm_logged_in
+  def logged_in
     unless session[:companion_id]
       redirect_to root_path, alert: "Please log in"
     end

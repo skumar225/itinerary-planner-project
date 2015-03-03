@@ -1,2 +1,16 @@
-<h1>Destinations#edit</h1>
-<p>Find me in app/views/destinations/edit.html.erb</p>
+<div class="container-fluid">
+<p><%= link_to "Home", '/plans' %> | <%= link_to "log out!", '/companions/logout' %></p>
+
+<h3 class="words">Destination</h3>
+<% flash.each do |key, val| %>
+<p class="words"><%= val if key == :notice %></p>
+<% end %>
+<p class="words">Please edit your destination details below. <small>(please ensure your date is between <%= @plan.name %>'s departure and return dates - <%= "#{@plan.departure_date} to #{@plan.return_date})" %></small></p>
+<%= form_for [@plan, @destination] do |f| %>
+<p><span class="words"><%= f.label :name, "Name:" %></span> <%= f.text_field :name %></p>
+<p><span class="words"><%= f.label :location, "Location:" %></span> <%= f.text_field :location %></p>
+<p><span class="words"><%= f.label :destination_date, "Date:" %></span> <br><%= f.date_select :destination_date %></p>
+<p><%= f.submit("Add Destination", class: "btn btn-success btn-sm") %></p>
+<% end %>
+
+</div>

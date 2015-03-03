@@ -1,2 +1,14 @@
-<h1>Companions#edit</h1>
-<p>Find me in app/views/companions/edit.html.erb</p>
+
+<div class="container-fluid">
+<p><%= link_to "Home", '/plans' %> | <%= link_to "log out!", '/companions/logout' %></p>
+
+<h2>Edit Companion <%= @companion.fullname %></h2>
+
+<%= form_for(@companion, url: edit_companion(@companion)) do |f|%>
+<p><%= f.text_field(:first_name, autofocus: true, placeholder: "firstname",class: "col-md-12 text-center") %></p>
+<p><%= f.text_field(:last_name, autofocus: true, placeholder: "lastname",class: "col-md-12 text-center") %></p>
+<p><%= f.text_field(:email, autofocus: true, placeholder: "email",class: "col-md-12 text-center") %></p>
+<p><%= f.password_field(:password, required: true, label: "",class: "col-md-12 text-center") %></p>
+<p class = "col-md-12 text-center"><%= f.submit("Add", class: "btn btn-success btn-sm") %></p>
+<% end %>
+</div>

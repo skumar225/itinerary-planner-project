@@ -1,5 +1,7 @@
 <div class="container-fluid words">
-<h2>Destination: <%= @destination.name %></h2>
+<p><%= link_to "Home", '/plans' %> | <%= link_to "log out!", '/companions/logout' %></p>
+
+<h2>Destination: <%= @destination.name %> <small><%= link_to "Edit", edit_destination_path(@destination) %></small></h2>
 
 <p>Name: <%= @destination.name %></p>
 <p>Travel Plan: <%= @plan.name %></p>
@@ -14,12 +16,22 @@
 
 <p>Add more companions: </p>
 <div class="col-md-2">
-<%= form_tag do |f| %>
-<%= collection_select(@destination, :companions, @p_comps, :id, :fullname, prompt: "Select Companion") %>
+<%= form_tag dest_comp_path(@destination) do |f| %>
+<%= collection_select(:companion, :comp, @p_comps, :id, :fullname, prompt: "Select Companion") %>
 <%= submit_tag("Add", class: "btn btn-success btn-sm") %>
 <% end %>
+
+<p>If you could not find your companion in the drop down, please add him/her below</p>
+<%= form_for Companion.new, url: "/destinations/#{@destination.id}/companions/new" do |f|%>
+<p><%= f.text_field(:first_name, autofocus: true, placeholder: "firstname",class: "col-md-12 text-center nowords") %></p>
+<p><%= f.text_field(:last_name, autofocus: true, placeholder: "lastname",class: "col-md-12 text-center nowords") %></p>
+<p><%= f.text_field(:email, autofocus: true, placeholder: "email",class: "col-md-12 text-center nowords") %></p>
+<p><%= f.password_field(:password, required: true, class: "col-md-12 text-center nowords") %></p>
+<p class = "col-md-12 text-center"><%= submit_tag("Add", class: "btn btn-success btn-sm") %></p>
+<% end %>
+
 </div><br><br>
-<div class="col-md-3">
+<div class="col-md-3 col-md-offset-4">
   <h3>Destination Reviews</h3>
 <% flash.each do |key, notice|  %>
 <p><%= notice %></p>

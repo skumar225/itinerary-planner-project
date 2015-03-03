@@ -1,4 +1,5 @@
 class DestinationsController < ApplicationController
+  before_action :logged_in 
   before_action :date_check, only: [:update, :create]
   skip_before_action :find_plan, only: [:show, :new]
 
@@ -20,6 +21,8 @@ class DestinationsController < ApplicationController
   end
 
   def edit
+    # @plan = Plan.find params[:plan_id]
+    @destination = Destination.find params[:id]
   end
 
   def create
@@ -35,6 +38,17 @@ class DestinationsController < ApplicationController
   end
 
   def update
+    @destination = Destination.find params[:id]
+    if @destination.update_attributes destination_params
+    flash[:notice] = "#{@destination.name} has been updated"
+    redirect_to @destination
+    else
+      flash[:notice] = "Failed to update #{@destination.name}, please check your form entries"
+      redirect_to :back
+    end
+  end
+
+  def add_comp
     
   end
 
@@ -43,6 +57,14 @@ class DestinationsController < ApplicationController
   end
 
   private
+
+  def logged_in
+    unless session[:companion_id]
+      flash[:alert] = "Please sign in"
+      redirect_to '/'
+    end
+  end
+
   def date_check #checks that the destination date is between plan departure and return dates.
     @plan = Plan.find(params[:plan_id])
     unless @plan.date_range.include? get_date(params[:destination])

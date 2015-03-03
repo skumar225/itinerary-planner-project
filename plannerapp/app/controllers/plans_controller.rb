@@ -1,4 +1,6 @@
 class PlansController < ApplicationController
+  before_action :logged_in
+
   def index
     @companion = Companion.find session[:companion_id]
     @plans = Plan.where(creator_id: @companion.id)
@@ -12,6 +14,7 @@ class PlansController < ApplicationController
 
   def show
     @plan = Plan.find(params[:id]) 
+    @reviews = @plan.reviews
     @destinations = @plan.destinations.order(:destination_date)
     final_dest = @destinations.last || nil
     @plan.destination_id = final_dest
@@ -56,6 +59,13 @@ class PlansController < ApplicationController
   end
 
   private
+
+  def logged_in
+    unless session[:companion_id]
+      flash[:alert] = "Please sign in"
+      redirect_to '/'
+    end
+  end
 
   def plan_params
     params.require(:plan).permit(:name, :origin, :departure_date, :return_date)
